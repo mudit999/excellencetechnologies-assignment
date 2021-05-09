@@ -10,9 +10,16 @@ const App = () => {
    // receiving TodoList from firestore
    useEffect(() => {
         projectFirestore.collection('todoList').orderBy('timeStamp','desc').onSnapshot((snap) => {
-          setTodoList(snap.docs.map( doc => doc.data().text))
+          setTodoList(snap.docs.map( doc => 
+            ({
+              todoItem : doc.data().text,
+              todoID : doc.id
+            })
+            ))
         })
     },[todoItem])
+
+    console.log(todoList)
 
 
    const formSubmit = (event) => {
@@ -51,7 +58,11 @@ const App = () => {
       {/* Display Todo List on screen */}
       <ul className = 'List'>
         {todoList.map((item,index) => {
-          return <li key = {index}> {item} </li>
+          return (
+            <div key = {index}>
+                      <li > {item.todoItem} </li>
+                      <button onClick = {(event) => projectFirestore.collection('todoList').doc(item.todoID).delete()}>Delete</button>
+            </div>)
         })}
       </ul>
 

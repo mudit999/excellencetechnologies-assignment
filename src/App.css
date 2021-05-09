@@ -25,6 +25,7 @@
 }
 
 .List li {
+  display: inline-block;
   list-style-type: none;
   font-size: large;
   border: 1px black solid;
@@ -32,4 +33,13 @@
   padding: 8px;
   font-size: large;
   margin-top: 8px;
+}
+
+.List button {
+  margin-top: 8px;
+  padding: 8px;
+  width: 100px;
+  font-size: large;
+  color: red;
+  cursor: pointer;
 }
